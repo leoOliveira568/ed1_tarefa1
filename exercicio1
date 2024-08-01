@@ -1,0 +1,37 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
+class Pessoa {
+    int numero;
+    String nome;
+
+    Pessoa(int numero, String nome) {
+        this.numero = numero;
+        this.nome = nome;
+    }
+}
+
+public class ProblemaJosephus {
+    public static void main(String[] args) {
+        List<Pessoa> pessoas = new ArrayList<>();
+
+        for (int i = 1; i <= 20; i++) {
+            pessoas.add(new Pessoa(i, "Pessoa " + i));
+        }
+
+        Random random = new Random();
+        int m = random.nextInt(20) + 1;
+        System.out.println("m escolhido aleatoriamente: " + m);
+
+        int indice = 0;
+        while (pessoas.size() > 1) {
+            indice = (indice + m - 1) % pessoas.size();
+            System.out.println("Eliminando: " + pessoas.get(indice).nome + " (Número: " + pessoas.get(indice).numero + ")");
+            pessoas.remove(indice);
+        }
+
+        Pessoa sobrevivente = pessoas.get(0);
+        System.out.println("A pessoa sobrevivente é: " + sobrevivente.nome + " (Número: " + sobrevivente.numero + ")");
+    }
+}
